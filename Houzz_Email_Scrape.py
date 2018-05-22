@@ -10,6 +10,8 @@ import time
 import random
 from webscraping import download
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # Takes two arguments:
 # 1. City and State in the "[city]--[State Initial]" format
