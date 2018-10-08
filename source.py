@@ -9,7 +9,6 @@ import random
 from webscraping import download
 import Tkinter
 import sys
-import threading
 
 def write(string):
     text_box.config(state=Tkinter.NORMAL)
@@ -24,15 +23,13 @@ def run(initials, city):
 	header = str(city) + "--" + str(initials)
 	main(header)
 
-# 1. City and State in the "[city]--[State Initial]" format
-# 2. The amount of records available in a specific search
 
 
 def WriteDictToCSV(csv_columns,dict_data):
 	with open("houzz.csv", 'a') as csvfile:
 		writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
 		for row in dict_data:
-			write(row)
+			print row
 			writer.writerow(row)
 
 
@@ -51,7 +48,7 @@ def main(header):
 	for k in range(0, 100000, 5):
 
 		r = urllib2.urlopen("http://www.houzz.com/professionals/kitchen-and-bath/c/%s/d/100/p/%s" %(header, k))
-		write(k)
+		print k
 
 		bs = BeautifulSoup(r, "lxml")
 		url = bs.find_all("a", class_="pro-title")
@@ -80,7 +77,7 @@ def main(header):
 						output["Email {}".format(x+1)] = emails[x]
 				data.append(output)
 
-				write(output)
+				print output
 
 				time.sleep(random.randint(6, 11))
 
@@ -89,8 +86,6 @@ def main(header):
 
 root = Tkinter.Tk()
 
-text_box = Tkinter.Text(root, state=Tkinter.DISABLED)
-text_box.grid(row=0, column=0, columnspan=4)
 
 Tkinter.Label(root, text="Initials of the State").grid(row=1)
 Tkinter.Label(root, text="City Name").grid(row=2)
