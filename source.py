@@ -25,6 +25,7 @@ def run(initials, city):
 
 
 
+
 def WriteDictToCSV(csv_columns,dict_data):
 	with open("houzz.csv", 'a') as csvfile:
 		writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
@@ -97,7 +98,7 @@ initials.grid(row=1, column=1)
 city.grid(row=2, column=1)
 
 
-button_1 = Tkinter.Button(root, text="Enter", command=lambda: run(initials, city))
+button_1 = Tkinter.Button(root, text="Enter", command=lambda: run(initials.get(), city.get()))
 button_1.grid(row=3, column=0)
 
 
